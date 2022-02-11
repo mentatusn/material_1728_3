@@ -4,16 +4,16 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.gb.material_1728_3.R
 import com.gb.material_1728_3.databinding.FragmentMainBinding
+import com.gb.material_1728_3.view.MainActivity
 import com.gb.material_1728_3.viewmodel.PictureOfTheDayData
 import com.gb.material_1728_3.viewmodel.PictureOfTheDayViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -21,7 +21,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 class MainFragment : Fragment() {
 
-
+    lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
     private var _binding: FragmentMainBinding? = null
     val binding: FragmentMainBinding
         get() = _binding!!
@@ -43,7 +43,6 @@ class MainFragment : Fragment() {
         _binding = null
     }
 
-     lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -54,17 +53,19 @@ class MainFragment : Fragment() {
 
         binding.inputLayout.setEndIconOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW).apply {
-                data  = Uri.parse("https://en.wikipedia.org/wiki/${binding.inputEditText.text.toString()}")
+                data =
+                    Uri.parse("https://en.wikipedia.org/wiki/${binding.inputEditText.text.toString()}")
             })
         }
 
-        bottomSheetBehavior= BottomSheetBehavior.from(binding.included.bottomSheetContainer)
+        bottomSheetBehavior = BottomSheetBehavior.from(binding.included.bottomSheetContainer)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
 
 
-        bottomSheetBehavior.addBottomSheetCallback( object : BottomSheetBehavior.BottomSheetCallback(){
+        bottomSheetBehavior.addBottomSheetCallback(object :
+            BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
-                when (newState){
+                when (newState) {
                     /*BottomSheetBehavior.STATE_DRAGGING -> TODO("not implemented")
                     BottomSheetBehavior.STATE_COLLAPSED -> TODO("not implemented")
                     BottomSheetBehavior.STATE_EXPANDED -> TODO("not implemented")
@@ -79,6 +80,9 @@ class MainFragment : Fragment() {
             }
 
         })
+
+        (requireActivity() as MainActivity).setSupportActionBar(binding.bottomAppBar)
+        setHasOptionsMenu(true)
     }
 
     private fun renderData(pictureOfTheDayData: PictureOfTheDayData) {
@@ -90,11 +94,31 @@ class MainFragment : Fragment() {
 
             }
             is PictureOfTheDayData.Success -> {
-                binding.imageView.load(pictureOfTheDayData.serverResponse.url){
+                binding.imageView.load(pictureOfTheDayData.serverResponse.url) {
                     placeholder(R.drawable.ic_no_photo_vector)
                 }
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_bottom_bar, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.app_bar_fav -> {
+                Toast.makeText(requireContext(), "app_bar_fav", Toast.LENGTH_SHORT).show()
+            }
+            R.id.app_bar_settings -> {
+                Toast.makeText(requireContext(), "app_bar_settings", Toast.LENGTH_SHORT).show()
+            }
+            android.R.id.home -> {
+                Toast.makeText(requireContext(), "home", Toast.LENGTH_SHORT).show()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     companion object {
