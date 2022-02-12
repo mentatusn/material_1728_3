@@ -114,6 +114,8 @@ class MainFragment : Fragment() {
 
             }
             is PictureOfTheDayData.Success -> {
+                //pictureOfTheDayData.serverResponse.title
+                //pictureOfTheDayData.serverResponse.explanation
                 binding.imageView.load(pictureOfTheDayData.serverResponse.url) {
                     placeholder(R.drawable.ic_no_photo_vector)
                 }
