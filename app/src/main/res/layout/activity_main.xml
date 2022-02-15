@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/container"
+    style="@style/Theme.Material_1728_3"
+    android:theme="@style/Theme.Material_1728_3"
     tools:context=".view.MainActivity">
 
 

@@ -28,6 +28,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/inputEditText"
+                android:textSize="@dimen/textSizeMain"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -45,6 +46,7 @@
             app:srcCompat="@drawable/ic_no_photo_vector" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
     <include
         android:id="@+id/included"
         layout="@layout/bottom_sheet_layout" />
@@ -54,7 +56,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:backgroundTint="@color/red_600"
         app:fabAlignmentMode="center"
         app:navigationIcon="@drawable/ic_hamburger_menu_bottom_bar" />
 
