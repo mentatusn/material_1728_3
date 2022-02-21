@@ -88,16 +88,22 @@ class MainFragment : Fragment() {
         setHasOptionsMenu(true)
 
         binding.fab.setOnClickListener{
-            if(isMain){
-                binding.bottomAppBar.navigationIcon = null
-                binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
-                binding.fab.setImageResource(R.drawable.ic_back_fab)
-                binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar_other_screen)
-            }else{
-                binding.bottomAppBar.navigationIcon = ContextCompat.getDrawable(requireContext(),R.drawable.ic_hamburger_menu_bottom_bar)
-                binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
-                binding.fab.setImageResource(R.drawable.ic_plus_fab)
-                binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar)
+            with(binding){
+                if(isMain){
+                    with(bottomAppBar){
+                        navigationIcon = null
+                        fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
+                        replaceMenu(R.menu.menu_bottom_bar_other_screen)
+                    }
+                    fab.setImageResource(R.drawable.ic_back_fab)
+                }else{
+                    with(bottomAppBar){
+                        navigationIcon = ContextCompat.getDrawable(requireContext(),R.drawable.ic_hamburger_menu_bottom_bar)
+                        fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
+                        replaceMenu(R.menu.menu_bottom_bar)
+                    }
+                    fab.setImageResource(R.drawable.ic_plus_fab)
+                }
             }
             isMain = !isMain
         }
