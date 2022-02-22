@@ -62,7 +62,7 @@ class MainFragment : Fragment() {
         }
 
         bottomSheetBehavior = BottomSheetBehavior.from(binding.included.bottomSheetContainer)
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
 
 
         bottomSheetBehavior.addBottomSheetCallback(object :
