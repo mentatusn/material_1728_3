@@ -57,12 +57,13 @@
         <item name="backgroundTint">?superColor</item>
 
     </style>
+
     <style name="myBottomAppBarStyleBlackBlue" parent="Widget.MaterialComponents.BottomAppBar">
         <item name="backgroundTint">#222222</item>
 
     </style>
 
-<!--    https://material.io/components/bottom-navigation/android#bottom-navigation-bar-->
+    <!--    https://material.io/components/bottom-navigation/android#bottom-navigation-bar-->
     <style name="myBottomNavigationStyle" parent="Widget.MaterialComponents.BottomNavigationView">
         <item name="backgroundTint">@color/orange</item>
     </style>

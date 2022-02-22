@@ -6,10 +6,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Observer
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.gb.material_1728_3.R
@@ -24,9 +23,9 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 class MainFragment : Fragment() {
 
-    lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
     private var _binding: FragmentMainBinding? = null
-    val binding: FragmentMainBinding
+    private val binding: FragmentMainBinding
         get() = _binding!!
 
     private val viewModel: PictureOfTheDayViewModel by lazy {
@@ -49,9 +48,9 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getData().observe(viewLifecycleOwner, Observer {
+        viewModel.getData().observe(viewLifecycleOwner) {
             renderData(it)
-        })
+        }
         viewModel.sendRequest()
 
         binding.inputLayout.setEndIconOnClickListener {
@@ -69,6 +68,24 @@ class MainFragment : Fragment() {
             BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 when (newState) {
+                    BottomSheetBehavior.STATE_DRAGGING -> {
+                        Log.d("myLogs", "BottomSheetBehavior.STATE_DRAGGING")
+                    }
+                    BottomSheetBehavior.STATE_COLLAPSED -> {
+                        Log.d("myLogs", "BottomSheetBehavior.STATE_COLLAPSED")
+                    }
+                    BottomSheetBehavior.STATE_EXPANDED -> {
+                        Log.d("myLogs", "BottomSheetBehavior.STATE_EXPANDED")
+                    }
+                    BottomSheetBehavior.STATE_HALF_EXPANDED -> {
+                        Log.d("myLogs", "BottomSheetBehavior.STATE_HALF_EXPANDED")
+                    }
+                    BottomSheetBehavior.STATE_HIDDEN -> {
+                        Log.d("myLogs", "BottomSheetBehavior.STATE_HIDDEN")
+                    }
+                    BottomSheetBehavior.STATE_SETTLING -> {
+                        Log.d("myLogs", "BottomSheetBehavior.STATE_SETTLING")
+                    }
                     /*BottomSheetBehavior.STATE_DRAGGING -> TODO("not implemented")
                     BottomSheetBehavior.STATE_COLLAPSED -> TODO("not implemented")
                     BottomSheetBehavior.STATE_EXPANDED -> TODO("not implemented")
@@ -87,18 +104,21 @@ class MainFragment : Fragment() {
         (requireActivity() as MainActivity).setSupportActionBar(binding.bottomAppBar)
         setHasOptionsMenu(true)
 
-        binding.fab.setOnClickListener{
-            with(binding){
-                if(isMain){
-                    with(bottomAppBar){
+        binding.fab.setOnClickListener {
+            with(binding) {
+                if (isMain) {
+                    with(bottomAppBar) {
                         navigationIcon = null
                         fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
                         replaceMenu(R.menu.menu_bottom_bar_other_screen)
                     }
                     fab.setImageResource(R.drawable.ic_back_fab)
-                }else{
-                    with(bottomAppBar){
-                        navigationIcon = ContextCompat.getDrawable(requireContext(),R.drawable.ic_hamburger_menu_bottom_bar)
+                } else {
+                    with(bottomAppBar) {
+                        navigationIcon = ContextCompat.getDrawable(
+                            requireContext(),
+                            R.drawable.ic_hamburger_menu_bottom_bar
+                        )
                         fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
                         replaceMenu(R.menu.menu_bottom_bar)
                     }
@@ -109,7 +129,7 @@ class MainFragment : Fragment() {
         }
     }
 
-    var isMain = true
+    private var isMain = true
 
     private fun renderData(pictureOfTheDayData: PictureOfTheDayData) {
         when (pictureOfTheDayData) {
@@ -140,10 +160,12 @@ class MainFragment : Fragment() {
                 Toast.makeText(requireContext(), "app_bar_fav", Toast.LENGTH_SHORT).show()
             }
             R.id.app_bar_settings -> {
-                requireActivity().supportFragmentManager.beginTransaction().replace(R.id.container,SettingsFragment.newInstance()).addToBackStack("").commit()
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.container, SettingsFragment.newInstance()).addToBackStack("")
+                    .commit()
             }
             android.R.id.home -> {
-                BottomNavigationDrawerFragment().show(requireActivity().supportFragmentManager,"ff")
+                BottomNavigationDrawerFragment().show(requireActivity().supportFragmentManager, "ff")
             }
         }
         return super.onOptionsItemSelected(item)

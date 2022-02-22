@@ -2,7 +2,7 @@ package com.gb.material_1728_3.repository
 
 import com.google.gson.annotations.SerializedName
 
-data class PDOServerResponse (
+data class PDOServerResponse(
     val copyright: String,
     val date: String,
     val explanation: String,

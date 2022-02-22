@@ -27,10 +27,10 @@
         android:layout_marginTop="5dp"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
+        android:text="@string/val_title_string"
         android:textColor="#000"
-        android:textStyle="bold"
         android:textSize="@dimen/textSizeBottomS"
-        android:text=" val title: String,"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bottom_sheet_line"
@@ -42,10 +42,10 @@
         android:layout_height="wrap_content"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
+        android:text="@string/val_explanation_string"
         android:textSize="@dimen/textSizeBottomS"
-        android:text="val explanation: String,"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bottom_sheet_description_header"
-        tools:text="This lovely starfield spans some four full moons." />
+        tools:text="This lovely start field spans some four full moons." />
 </androidx.constraintlayout.widget.ConstraintLayout>
