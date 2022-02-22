@@ -22,13 +22,13 @@ class ViewPagerAdapter(private val fragmentManager: FragmentManager) :
     override fun getItem(position: Int) = fragments[position]
 
     override fun getPageTitle(position: Int): CharSequence? {
-        //return null
-        return when (position) {
+        return null
+        /*return when (position) {
             EARTH -> "Earth"
             MARS -> "Mars"
             SYSTEM -> "System"
             else ->"null"
-        }
+        }*/
     }
 
 }
