@@ -8,6 +8,8 @@ import com.gb.material_1728_3.R
 import com.gb.material_1728_3.databinding.ActivityApiBinding
 import com.gb.material_1728_3.databinding.FragmentSettingsBinding
 import com.gb.material_1728_3.view.main.MainFragment
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 class ApiActivity : AppCompatActivity() {
 
@@ -16,10 +18,14 @@ class ApiActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityApiBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.viewPager.adapter = ViewPagerAdapter(supportFragmentManager) // TODO передать child
-        binding.tabLayout.setupWithViewPager(binding.viewPager)
-
-
+        binding.viewPager.adapter = ViewPager2Adapter(this)
+       // binding.tabLayout.setupWithViewPager(binding.viewPager)
+        val tabTitles = arrayOf("Earth", "Mars", "System")
+        TabLayoutMediator(binding.tabLayout,binding.viewPager, object : TabLayoutMediator.TabConfigurationStrategy{
+            override fun onConfigureTab(tab: TabLayout.Tab, position: Int) {
+                tab.text = tabTitles[position]
+            }
+        }).attach()
 
         binding.tabLayout.getTabAt(EARTH)?.customView = layoutInflater.inflate(R.layout.activity_api_tablayout_item_earth,null)
         binding.tabLayout.getTabAt(MARS)?.customView = layoutInflater.inflate(R.layout.activity_api_tablayout_item_mars,null)
