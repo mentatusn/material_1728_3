@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.gb.material_1728_3.R
 import com.gb.material_1728_3.databinding.FragmentMainBinding
+import com.gb.material_1728_3.databinding.FragmentMainStartBinding
 import com.gb.material_1728_3.view.MainActivity
 import com.gb.material_1728_3.view.settings.SettingsFragment
 import com.gb.material_1728_3.viewmodel.PictureOfTheDayData
@@ -25,8 +26,8 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 class MainFragment : Fragment() {
 
     lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
-    private var _binding: FragmentMainBinding? = null
-    val binding: FragmentMainBinding
+    private var _binding: FragmentMainStartBinding? = null
+    val binding: FragmentMainStartBinding
         get() = _binding!!
 
     private val viewModel: PictureOfTheDayViewModel by lazy {
@@ -37,7 +38,7 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentMainBinding.inflate(inflater, container, false)
+        _binding = FragmentMainStartBinding.inflate(inflater, container, false)
         return binding.root
     }
 

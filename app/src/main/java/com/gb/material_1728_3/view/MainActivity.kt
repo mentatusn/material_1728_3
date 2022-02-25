@@ -15,27 +15,13 @@ import com.gb.material_1728_3.view.main.MainFragment
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // SP
-        setTheme(R.style.MyBlackBlue)
         setContentView(R.layout.activity_main)
 
-        val textView = TextView(this).apply {
-            text=""
-            textSize=30f
-            gravity = Gravity.NO_GRAVITY
-
-        }
 
         if(savedInstanceState==null){
-            //supportFragmentManager.beginTransaction().replace(R.id.container,MainFragment.newInstance()).commit()
-            supportFragmentManager.beginTransaction().replace(R.id.container,CoordinatorFragment.newInstance()).commit()
+            supportFragmentManager.beginTransaction().replace(R.id.container,MainFragment.newInstance()).commit()
+            //supportFragmentManager.beginTransaction().replace(R.id.container,CoordinatorFragment.newInstance()).commit()
         }
 
-        /*findViewById<Button>(R.id.button1).visibility = View.GONE
-        findViewById<Button>(R.id.button2).visibility = View.GONE*/
-
-        //findViewById<Group>(R.id.group1).visibility = View.GONE
-
-//        recreate()
     }
 }
