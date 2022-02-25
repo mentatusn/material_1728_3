@@ -7,7 +7,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.google.android.material.appbar.AppBarLayout
 import kotlin.math.abs
 
-class ButtonBehavior(context:Context, attributeSet: AttributeSet) : CoordinatorLayout.Behavior<View>(context,attributeSet) {
+class ButtonBehavior(context:Context, attributeSet: AttributeSet?=null) : CoordinatorLayout.Behavior<View>(context,attributeSet) {
 
     override fun layoutDependsOn(
         parent: CoordinatorLayout,
@@ -34,4 +34,5 @@ class ButtonBehavior(context:Context, attributeSet: AttributeSet) : CoordinatorL
         }
         return super.onDependentViewChanged(parent, child, dependency)
     }
+
 }
