@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.constraintlayout.widget.Group
 import com.gb.material_1728_3.R
+import com.gb.material_1728_3.view.coordinator.CoordinatorFragment
 import com.gb.material_1728_3.view.main.MainFragment
 
 
@@ -16,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         // SP
         setTheme(R.style.MyBlackBlue)
-        setContentView(R.layout.activity_test_layout)
+        setContentView(R.layout.activity_main)
 
         val textView = TextView(this).apply {
             text=""
@@ -27,6 +28,7 @@ class MainActivity : AppCompatActivity() {
 
         if(savedInstanceState==null){
             //supportFragmentManager.beginTransaction().replace(R.id.container,MainFragment.newInstance()).commit()
+            supportFragmentManager.beginTransaction().replace(R.id.container,CoordinatorFragment.newInstance()).commit()
         }
 
         /*findViewById<Button>(R.id.button1).visibility = View.GONE
