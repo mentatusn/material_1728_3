@@ -1,12 +1,10 @@
 package com.gb.material_1728_3.view.animations
 
 import android.os.Bundle
-import android.transition.ChangeBounds
-import android.transition.Fade
-import android.transition.TransitionManager
-import android.transition.TransitionSet
+import android.view.Gravity
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.transition.*
 import com.gb.material_1728_3.databinding.ActivityAnimationsBinding
 
 class AnimationsActivity : AppCompatActivity() {
@@ -20,13 +18,12 @@ class AnimationsActivity : AppCompatActivity() {
         binding.button.setOnClickListener {
 
             val transitionSet = TransitionSet()
-            val fade = Fade()
-            val changeBounds = ChangeBounds()
-            fade.duration = 2000
-            changeBounds.duration= 5000
+            val slide = Slide(Gravity.END)
+            val explode = Explode()
+            slide.duration = 2000
             transitionSet.ordering = TransitionSet.ORDERING_SEQUENTIAL
-            transitionSet.addTransition(fade)
-            transitionSet.addTransition(changeBounds)
+            transitionSet.addTransition(slide)
+            //transitionSet.addTransition(explode)
             TransitionManager.beginDelayedTransition(binding.transitionsContainer,transitionSet)
 
             textISVisible = !textISVisible
