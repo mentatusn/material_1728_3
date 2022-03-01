@@ -10,6 +10,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.gb.material_1728_3.R
 import com.gb.material_1728_3.databinding.BottomNavigationLayoutBinding
 import com.gb.material_1728_3.databinding.FragmentMainBinding
+import com.gb.material_1728_3.view.animations.AnimationsActivity
 import com.gb.material_1728_3.view.bottomnavigation.ApiBottomActivity
 import com.gb.material_1728_3.view.viewpager.ApiActivity
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -38,6 +39,9 @@ class BottomNavigationDrawerFragment:BottomSheetDialogFragment() {
                 }
                 R.id.navigation_two -> {
                     startActivity(Intent(requireContext(), ApiBottomActivity::class.java))
+                }
+                R.id.navigation_three -> {
+                    startActivity(Intent(requireContext(), AnimationsActivity::class.java))
                 }
             }
             true
