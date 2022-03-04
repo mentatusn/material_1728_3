@@ -4,14 +4,18 @@
         <item
             android:id="@+id/navigation_one"
             android:icon="@drawable/ic_archive"
-            android:title="ApiActivity" />
+            android:title="@string/apiactivity" />
         <item
             android:id="@+id/navigation_two"
             android:icon="@drawable/ic_send"
-            android:title="ApiBottomActivity" />
+            android:title="@string/apibottomactivity" />
         <item
             android:id="@+id/navigation_three"
             android:icon="@drawable/ic_send"
-            android:title="AnimationsActivity" />
+            android:title="@string/animationsactivity" />
+        <item
+            android:id="@+id/navigation_four"
+            android:icon="@drawable/ic_send"
+            android:title="@string/recycleractivity" />
     </group>
 </menu>
