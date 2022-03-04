@@ -6,6 +6,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.MotionEventCompat
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.gb.material_1728_3.databinding.ActivityRecyclerItemEarthBinding
 import com.gb.material_1728_3.databinding.ActivityRecyclerItemHeaderBinding
@@ -20,6 +21,14 @@ class RecyclerActivityAdapter(
     override fun getItemViewType(position: Int): Int {
         return dataSet[position].second.type
     }
+
+    fun setItems(newItems: List<Pair<Int,Data,>>) {
+        val result = DiffUtil.calculateDiff(DiffUtilCallBack(dataSet, newItems))
+        result.dispatchUpdatesTo(this)
+        dataSet.clear()
+        dataSet.addAll(newItems)
+    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         when (viewType) {
@@ -51,6 +60,20 @@ class RecyclerActivityAdapter(
         holder.bind(dataSet[position])
     }
 
+    override fun onBindViewHolder(
+        holder: BaseViewHolder,
+        position: Int,
+        payloads: MutableList<Any>
+    ) {
+        if(payloads.isNotEmpty()&&(holder is MarsViewHolder)){
+            val pair = createCombinePayload(payloads as List<Change<Pair<Int, Data>>>)
+            ActivityRecyclerItemMarsBinding.bind(holder.itemView).marsTextView.text = pair.newData.second.someText
+        }else{
+            super.onBindViewHolder(holder, position, payloads)
+        }
+
+    }
+
     override fun getItemCount() = dataSet.size
 
     fun addItem() {
@@ -58,7 +81,7 @@ class RecyclerActivityAdapter(
         notifyItemInserted(itemCount - 1)
     }
 
-    private fun generateNewItem() = Pair(ITEM_CLOSE, Data("new Mars", type = TYPE_MARS))
+    private fun generateNewItem() = Pair(ITEM_CLOSE, Data(someText ="new Mars", type = TYPE_MARS))
 
 
     abstract class BaseViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -89,6 +112,7 @@ class RecyclerActivityAdapter(
                 moveItemDown.setOnClickListener {
                     moveDown()
                 }
+                marsTextView.text = data.second.someText
                 marsTextView.setOnClickListener {
                     dataSet[layoutPosition] = dataSet[layoutPosition].let {
                         val currentState = if(it.first== ITEM_CLOSE) ITEM_OPEN else  ITEM_CLOSE
