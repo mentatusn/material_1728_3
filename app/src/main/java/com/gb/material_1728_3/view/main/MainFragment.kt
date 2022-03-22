@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
+import android.text.Html
 import android.util.Log
 import android.view.*
 import android.widget.Toast
@@ -130,10 +131,13 @@ class MainFragment : Fragment() {
                     placeholder(R.drawable.ic_no_photo_vector)
                 }
 
-                binding.textView.typeface = Typeface.createFromAsset(
+                /*binding.textView.typeface = Typeface.createFromAsset(
                     requireActivity().assets,
                     "myfolder/subfolder/font/Robus_BWqOd.otf"
-                )
+                )*/
+
+                val text = "My text <ul><li>bullet one</li><li>bullet <h1>two</h1></li></ul>"
+                binding.textView.text = Html.fromHtml(text,Html.FROM_HTML_MODE_COMPACT)
             }
         }
     }
