@@ -3,10 +3,14 @@ package com.gb.material_1728_3.view.main
 import android.content.Intent
 import android.graphics.Typeface
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
-import android.text.Html
+import android.os.Handler
+import android.text.*
+import android.text.style.*
 import android.util.Log
 import android.view.*
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -136,8 +140,50 @@ class MainFragment : Fragment() {
                     "myfolder/subfolder/font/Robus_BWqOd.otf"
                 )*/
 
-                val text = "My text <ul><li>bullet one</li><li>bullet <h1>two</h1></li></ul>"
-                binding.textView.text = Html.fromHtml(text,Html.FROM_HTML_MODE_COMPACT)
+                //val text = "My text <ul><li>bullet one</li><li>bullet <h1>two</h1></li></ul>"
+                //binding.textView.text = Html.fromHtml(text,Html.FROM_HTML_MODE_COMPACT)
+
+                var text = pictureOfTheDayData.serverResponse.explanation
+
+                /*text.split("\n").forEach {
+                    it.length
+                }*/
+                var spannableStringBuilder = SpannableStringBuilder(text) // меняем текст, и его свойства/параметры
+                val spannableString = SpannableString(text)//  меняем свойства/параметры текста
+                val spanned = SpannedString(text) // ничего не можем изменить, но можем хранить ссылку на результат SpannableStringBuilder и/или SpannableString
+                binding.textView.setText(spannableStringBuilder, TextView.BufferType.EDITABLE)
+                //binding.textView.setText(spannableString, TextView.BufferType.SPANNABLE)
+                spannableStringBuilder = binding.textView.text as SpannableStringBuilder
+
+                spannableStringBuilder.insert(10,"\n")
+                spannableStringBuilder.insert(20,"\n")// пальцем в небо
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                    spannableStringBuilder.setSpan(BulletSpan(50,ContextCompat.getColor(requireContext(),R.color.red),20),10,20,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                }else{
+                    spannableStringBuilder.setSpan(BulletSpan(50,ContextCompat.getColor(requireContext(),R.color.red)),9,19,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                }
+
+                spannableStringBuilder.setSpan(ForegroundColorSpan(ContextCompat.getColor(requireContext(),R.color.red)),0,10,Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
+
+                spannableStringBuilder.setSpan(StyleSpan(Typeface.BOLD_ITALIC),5,20,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                spannableStringBuilder.setSpan(UnderlineSpan(), 20, 200, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+
+                spannableStringBuilder.indices.forEach {
+                    if(spannableStringBuilder[it]=='o'){
+                        spannableStringBuilder.setSpan(ImageSpan(requireContext(),R.drawable.ic_earth,DynamicDrawableSpan.ALIGN_BASELINE  ), it, it+1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                    }
+                }
+
+                Handler(requireActivity().mainLooper).postDelayed({
+                    //ForegroundColorSpan
+                }
+                ,200L)
+
+
+
+
             }
         }
     }
