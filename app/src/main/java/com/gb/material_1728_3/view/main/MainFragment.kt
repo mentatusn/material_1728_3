@@ -1,6 +1,7 @@
 package com.gb.material_1728_3.view.main
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -87,18 +88,21 @@ class MainFragment : Fragment() {
         (requireActivity() as MainActivity).setSupportActionBar(binding.bottomAppBar)
         setHasOptionsMenu(true)
 
-        binding.fab.setOnClickListener{
-            with(binding){
-                if(isMain){
-                    with(bottomAppBar){
+        binding.fab.setOnClickListener {
+            with(binding) {
+                if (isMain) {
+                    with(bottomAppBar) {
                         navigationIcon = null
                         fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
                         replaceMenu(R.menu.menu_bottom_bar_other_screen)
                     }
                     fab.setImageResource(R.drawable.ic_back_fab)
-                }else{
-                    with(bottomAppBar){
-                        navigationIcon = ContextCompat.getDrawable(requireContext(),R.drawable.ic_hamburger_menu_bottom_bar)
+                } else {
+                    with(bottomAppBar) {
+                        navigationIcon = ContextCompat.getDrawable(
+                            requireContext(),
+                            R.drawable.ic_hamburger_menu_bottom_bar
+                        )
                         fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
                         replaceMenu(R.menu.menu_bottom_bar)
                     }
@@ -125,6 +129,11 @@ class MainFragment : Fragment() {
                 binding.imageView.load(pictureOfTheDayData.serverResponse.url) {
                     placeholder(R.drawable.ic_no_photo_vector)
                 }
+
+                binding.textView.typeface = Typeface.createFromAsset(
+                    requireActivity().assets,
+                    "myfolder/subfolder/font/Robus_BWqOd.otf"
+                )
             }
         }
     }
@@ -140,10 +149,15 @@ class MainFragment : Fragment() {
                 Toast.makeText(requireContext(), "app_bar_fav", Toast.LENGTH_SHORT).show()
             }
             R.id.app_bar_settings -> {
-                requireActivity().supportFragmentManager.beginTransaction().replace(R.id.container,SettingsFragment.newInstance()).addToBackStack("").commit()
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.container, SettingsFragment.newInstance()).addToBackStack("")
+                    .commit()
             }
             android.R.id.home -> {
-                BottomNavigationDrawerFragment().show(requireActivity().supportFragmentManager,"ff")
+                BottomNavigationDrawerFragment().show(
+                    requireActivity().supportFragmentManager,
+                    "ff"
+                )
             }
         }
         return super.onOptionsItemSelected(item)
