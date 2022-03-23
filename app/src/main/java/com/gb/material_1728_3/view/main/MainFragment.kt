@@ -15,6 +15,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.core.provider.FontRequest
+import androidx.core.provider.FontsContractCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import coil.load
@@ -116,6 +118,20 @@ class MainFragment : Fragment() {
             }
             isMain = !isMain
         }
+
+        val request = FontRequest("com.google.android.gms.fonts","com.google.android.gms","Aguafina Script",R.array.com_google_android_gms_fonts_certs)
+
+        val callback = object : FontsContractCompat.FontRequestCallback(){
+            override fun onTypefaceRetrieved(typeface: Typeface?) {
+                super.onTypefaceRetrieved(typeface)
+                binding.textView.typeface =typeface
+
+                /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                    spannableStringBuilder.setSpan(TypefaceSpan(typeface),5,20,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                }*/
+            }
+        }
+        FontsContractCompat.requestFont(requireContext(),request,callback,Handler(requireActivity().mainLooper))
     }
 
     var isMain = true
