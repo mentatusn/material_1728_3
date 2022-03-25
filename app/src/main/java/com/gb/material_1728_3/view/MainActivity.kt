@@ -15,6 +15,7 @@ import com.gb.material_1728_3.view.main.MainFragment
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.MyThemeGreen)
         setContentView(R.layout.activity_main)
 
 
