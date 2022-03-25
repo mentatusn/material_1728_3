@@ -9,25 +9,8 @@ import smartdevelop.ir.eram.showcaseviewlib.config.DismissType
 import smartdevelop.ir.eram.showcaseviewlib.config.Gravity
 
 
-class TutorialFragment : Fragment() {
-
-    private var _binding: FragmentUxButtonBinding? = null
-    val binding: FragmentUxButtonBinding
-        get() = _binding!!
-
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentUxButtonBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
+class TutorialFragment :
+    ViewBindingFragment<FragmentUxButtonBinding>(FragmentUxButtonBinding::inflate) {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,20 +18,21 @@ class TutorialFragment : Fragment() {
         showBad()
     }
 
-    private fun showBad(){
+    private fun showBad() {
         val builder = GuideView.Builder(requireContext())
             .setTitle("Это неправильно")
             .setContentText("Мы не работаем с цветами и размерами")
-            .setGravity(Gravity.auto)
+            .setGravity(Gravity.center)
             .setDismissType(DismissType.anywhere)
-            .setTargetView(binding.layoutBad)
+            .setTargetView(binding.btnTestBad)
             .setGuideListener {
                 // тут запустим сразу вторую подсказку
                 showGood()
             }
         builder.build().show()
     }
-    private fun showGood(){
+
+    private fun showGood() {
         val builder = GuideView.Builder(requireContext())
             .setTitle("Это правильно")
             .setContentText("Мы работаем с прозначностью")

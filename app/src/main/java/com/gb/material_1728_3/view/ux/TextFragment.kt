@@ -22,6 +22,7 @@ import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.gb.material_1728_3.R
 import com.gb.material_1728_3.databinding.FragmentMainBinding
+import com.gb.material_1728_3.databinding.FragmentUxButtonBinding
 import com.gb.material_1728_3.databinding.FragmentUxTextBinding
 import com.gb.material_1728_3.view.MainActivity
 import com.gb.material_1728_3.view.main.BottomNavigationDrawerFragment
@@ -32,26 +33,8 @@ import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 
-class TextFragment : Fragment() {
-
-    private var _binding: FragmentUxTextBinding? = null
-    val binding: FragmentUxTextBinding
-        get() = _binding!!
-
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentUxTextBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
-
+class TextFragment :
+    ViewBindingFragment<FragmentUxTextBinding>(FragmentUxTextBinding::inflate) {
 
     companion object {
         @JvmStatic
