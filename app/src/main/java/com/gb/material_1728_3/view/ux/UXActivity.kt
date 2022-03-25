@@ -32,6 +32,10 @@ class UXActivity : AppCompatActivity() {
                     navigateTo(ButtonFragment())
                     true
                 }
+                R.id.fragment_ux_tutorial->{
+                    navigateTo(TutorialFragment())
+                    true
+                }
                 else -> true
             }
         }
