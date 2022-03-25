@@ -3,4 +3,5 @@
 
     <dimen name="textSizeMain">25sp</dimen>
     <dimen name="textSizeBottomS">25sp</dimen>
+    <dimen name="linear_height">90dp</dimen>
 </resources>
